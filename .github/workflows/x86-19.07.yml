@@ -56,7 +56,8 @@ jobs:
       - name: 自定义插件
         run: |
            cd package/diy
-           git clone  https://github.com/Leo-Jo/luci-app-vssr
+           git clone https://github.com/Leo-Jo/luci-app-vssr
+           git clone https://github.com/Leo-Jo-My/my my
            git clone https://github.com/Leo-Jo/luci-app-koolproxyR.git
            git clone https://github.com/frainzy1477/luci-app-clash.git
            git clone https://github.com/vernesong/OpenClash.git 
