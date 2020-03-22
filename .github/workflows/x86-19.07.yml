@@ -60,8 +60,11 @@ jobs:
            git clone https://github.com/Leo-Jo-My/my my
            git clone https://github.com/Leo-Jo/luci-app-koolproxyR.git
            git clone https://github.com/frainzy1477/luci-app-clash.git
-           git clone https://github.com/vernesong/OpenClash.git 
-           
+           git clone https://github.com/vernesong/OpenClash.git
+           rm    -rfv  my/openwrt-dnsforwarder
+           rm    -rfv  my/openwrt-simple-obfs
+           rm    -rfv  my/openwrt-v2ray-plugin
+                      
       - name: Update feeds
         run: |
           ./scripts/feeds update -a
