@@ -1,0 +1,54 @@
+#
+# This is free software, lisence use MIT.
+# 
+# Copyright (C) 2019 KFERMercer <KFER.Mercer@gmail.com>
+# 
+# <https://github.com/KFERMercer/OpenWrt-CI>
+#
+
+name: Merge-upstream
+
+on:
+  release:
+    types: published
+  push:
+#    branches:
+#      - master
+    paths:
+      - '.github/workflows/merge-upstream.yml'
+  
+  schedule:
+    - cron: 30 19 * * *
+  # push:
+  #   branches: 
+  #     - master
+  watch:
+    types: started
+
+jobs:
+
+  merge:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@master
+      with:
+        ref: master
+        fetch-depth: 0
+        lfs: true
+
+    - name: Set git identity
+      run : |
+        git config --global user.email "ycg31@qq.com"
+        git config --global user.name "ycg31"
+    - name: Load upstream commits
+      run: git pull https://github.com/Lienol/openwrt.git --no-edit --strategy-option ours
+
+    - name: Push Commits
+      env:
+        DOWNSTREAM_BRANCH: master
+      run: git push origin $DOWNSTREAM_BRANCH
